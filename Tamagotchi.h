@@ -10,6 +10,8 @@ enum Tipos{
     Snake
 };
 
+
+
 class Tamagotchi
 {
 public:
@@ -17,7 +19,7 @@ public:
 
 private:
     string nombre;
-    int hp, waitTime;
+    unsigned int hp, waitTime;
 
 };
 

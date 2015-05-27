@@ -19,9 +19,15 @@
      <rect>
       <x>80</x>
       <y>30</y>
-      <width>256</width>
-      <height>192</height>
+      <width>65</width>
+      <height>65</height>
      </rect>
+    </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
     </property>
    </widget>
   </widget>

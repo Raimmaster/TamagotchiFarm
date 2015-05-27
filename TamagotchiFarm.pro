@@ -17,6 +17,9 @@ SOURCES += main.cpp\
     Tamagotchi.cpp
 
 HEADERS  += mainwindow.h \
-    Tamagotchi.h
+    Tamagotchi.h \
+    Nodo.h \
+    Cola.h \
+    Pila.h
 
 FORMS    += mainwindow.ui
