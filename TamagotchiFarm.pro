@@ -13,8 +13,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    Tamagotchi.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    Tamagotchi.h
 
 FORMS    += mainwindow.ui
