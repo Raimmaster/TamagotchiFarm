@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>844</width>
+    <width>690</width>
     <height>477</height>
    </rect>
   </property>
@@ -22,6 +22,12 @@
       <width>201</width>
       <height>151</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="title">
      <string>Creación de Tamagotchi</string>
@@ -95,6 +101,12 @@
       <height>101</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="title">
      <string>Tamagotchis</string>
     </property>
@@ -140,9 +152,15 @@
      <rect>
       <x>230</x>
       <y>10</y>
-      <width>431</width>
+      <width>421</width>
       <height>241</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="title">
      <string>Estado</string>
@@ -178,7 +196,7 @@
       <rect>
        <x>10</x>
        <y>70</y>
-       <width>411</width>
+       <width>401</width>
        <height>161</height>
       </rect>
      </property>
@@ -300,6 +318,12 @@
       <height>131</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="title">
      <string>Coins</string>
     </property>
@@ -355,6 +379,12 @@
       <height>141</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="title">
      <string>Log</string>
     </property>
@@ -378,7 +408,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>844</width>
+     <width>690</width>
      <height>20</height>
     </rect>
    </property>
