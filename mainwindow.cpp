@@ -73,11 +73,20 @@ int MainWindow::tipoToInt(){
 
 bool MainWindow::searchFarm(string nombre){
     for(unsigned int i = 0; i < granja.size(); i++){
+        granja[i]->printResistances();
         if(granja[i]->getNombre() == nombre)
             return true;
     }
 
     return false;
+}
+
+void MainWindow::updateComboElegir(){
+    ui->cTamagotchis->clear();
+    for(unsigned int i = 0; i < granja.size(); i++){
+        QString q = QString::fromStdString(granja[i]->getNombre());
+        ui->cTamagotchis->addItem(q);
+    }
 }
 
 void MainWindow::on_bCrear_clicked()
@@ -86,5 +95,7 @@ void MainWindow::on_bCrear_clicked()
 
     if(!searchFarm(nombre)){
         granja.push_back(new Tamagotchi(nombre, tipoToInt()));
+        updateComboElegir();
     }
 }
+

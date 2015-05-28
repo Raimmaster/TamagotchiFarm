@@ -20,6 +20,7 @@ public:
     const static unsigned int TIEMPO_VICTORIA = 40, LOSE_TIME = 30;
     int tipoToInt();
     bool searchFarm(string nombre);
+    void updateComboElegir();
     ~MainWindow();
 
 private slots:

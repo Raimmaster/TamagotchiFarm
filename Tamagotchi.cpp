@@ -77,3 +77,7 @@ Tamagotchi::~Tamagotchi(){
     giftCoins.anular();
     logros.anular();
 }
+
+void Tamagotchi::printResistances(){
+    cout<<"Hambre: "<<rHambre<<" Sonno: "<<rSleep<<" Enfermedad: "<<rEnfermedad<<" Desechos: "<<rDesechos<<endl;
+}

@@ -31,6 +31,7 @@ public:
 
     string getNombre();
     unsigned int getHp();
+    void printResistances();
     void checkResistances(int h, int s, int e, int d);
     void useCoin();
     string imagePath;
