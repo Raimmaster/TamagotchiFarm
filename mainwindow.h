@@ -7,6 +7,8 @@
 #include "Tamagotchi.h"
 #include <vector>
 
+#include "MyTimer.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -17,14 +19,19 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    const static unsigned int TIEMPO_VICTORIA = 40, LOSE_TIME = 30;
+    const static unsigned int TIEMPO_VICTORIA = 8, LOSE_TIME = 5;
     int tipoToInt();
-    bool searchFarm(string nombre);
+    Tamagotchi* searchFarm(string nombre);
     void updateComboElegir();
     ~MainWindow();
 
+public slots:
+    void incrementCounter();
+
 private slots:
     void on_bCrear_clicked();
+
+    void on_bCambiar_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -34,6 +41,10 @@ private:
     QGraphicsScene *scene;
     void init();
     vector<Tamagotchi*> granja;
+    Tamagotchi* actual;
+    //QTimer* timer;
+    MyTimer* timer;
+    unsigned int* TIEMPO;
 };
 
 #endif // MAINWINDOW_H

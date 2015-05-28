@@ -8,6 +8,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    MainWindow::TIEMPO = new unsigned int(0);
+
     init();
 }
 
@@ -23,13 +25,23 @@ void MainWindow::init(){
 
     QStringList listaTipos;
     listaTipos<<"Wolf"<<"Ghost"<<"Snake";
-    //QString t = "Test";´
     ui->cTipo->addItems(listaTipos);
+
+    ui->lCoinsPersonales->setText("Personales: 0");
+    ui->lCoinsDonables->setText("Donables: 0");
+
+    //Initialize timer
+    timer = new MyTimer(TIEMPO);
 }
 
 MainWindow::~MainWindow()
 {   
     delete ui;
+}
+
+void MainWindow::incrementCounter(){
+    TIEMPO++;
+    cout<<"Tiempo: "<<TIEMPO<<endl;
 }
 
 /*How to add images
@@ -71,14 +83,13 @@ int MainWindow::tipoToInt(){
     }
 }
 
-bool MainWindow::searchFarm(string nombre){
+Tamagotchi* MainWindow::searchFarm(string nombre){
     for(unsigned int i = 0; i < granja.size(); i++){
-        granja[i]->printResistances();
         if(granja[i]->getNombre() == nombre)
-            return true;
+            return granja[i];
     }
 
-    return false;
+    return NULL;
 }
 
 void MainWindow::updateComboElegir(){
@@ -92,6 +103,7 @@ void MainWindow::updateComboElegir(){
 void MainWindow::on_bCrear_clicked()
 {
     string nombre = ui->tNombre->text().toStdString();
+    ui->tNombre->clear();
 
     if(!searchFarm(nombre)){
         granja.push_back(new Tamagotchi(nombre, tipoToInt()));
@@ -99,3 +111,14 @@ void MainWindow::on_bCrear_clicked()
     }
 }
 
+void MainWindow::on_bCambiar_clicked()
+{
+    string nombre = ui->cTamagotchis->currentText().toStdString();
+
+    Tamagotchi* temp = searchFarm(nombre);
+
+    if(temp){
+        actual = temp;
+        cout<<actual->getNombre()<< " HP: "<<actual->getHp()<<endl;
+    }
+}
