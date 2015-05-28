@@ -17,7 +17,7 @@ public:
         return tope;
     }
 
-    void meter(Nodo* obj){
+    void meter(Nodo<Tipo>* obj){
         if(tope)
             obj->anterior = tope;
 
@@ -26,7 +26,7 @@ public:
 
     bool sacar(){
         if(tope){
-            Nodo* t = tope;
+            Nodo<Tipo>* t = tope;
             tope = tope->anterior;
             delete t;
             return true;
@@ -44,6 +44,11 @@ public:
 
     void anular(){
         while(sacar());
+    }
+
+    bool agregar(Tipo valor){
+        Nodo<Tipo>* n = new Nodo<Tipo>(valor);
+        meter(n);
     }
 };
 

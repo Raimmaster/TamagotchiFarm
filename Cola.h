@@ -4,12 +4,14 @@
 
 template <typename Tipo>
 class Cola{
+private:
+    Nodo* frente = NULL;
+    Nodo* ultimo = NULL;
 public:
     Cola(){
 
     }
-    Nodo* frente = NULL;
-    Nodo* ultimo = NULL;
+
     Nodo* getFrente(){
         return frente;
     }
@@ -45,6 +47,18 @@ public:
 
     void anular(){
         while(quitarDeCola());
+    }
+
+    /**
+     * @brief agregar - Agrega el objeto a la cola
+     * @param valor - Valor a dar al nuevo objeto
+     * @return - True si se pudo
+     */
+    bool agregar(Tipo valor){
+        Nodo<Tipo>* n = new Nodo<Tipo>(valor);
+        ponerEnCola(n);
+
+        return true;
     }
 };
 

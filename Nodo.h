@@ -10,6 +10,7 @@ class Nodo
 public:
     Tipo valor;
     Nodo* anterior;
+
     Nodo(Tipo valor){
         this->valor = valor;
         this->anterior = NULL;

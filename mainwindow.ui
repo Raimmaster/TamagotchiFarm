@@ -6,29 +6,371 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>844</width>
+    <height>477</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Granja de Tamagotchis</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QGraphicsView" name="graphicsView">
+   <widget class="QGroupBox" name="gCreation">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>30</y>
-      <width>65</width>
-      <height>65</height>
+      <x>10</x>
+      <y>20</y>
+      <width>201</width>
+      <height>151</height>
      </rect>
     </property>
-    <property name="verticalScrollBarPolicy">
-     <enum>Qt::ScrollBarAlwaysOff</enum>
+    <property name="title">
+     <string>Creación de Tamagotchi</string>
     </property>
-    <property name="horizontalScrollBarPolicy">
-     <enum>Qt::ScrollBarAlwaysOff</enum>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>57</width>
+       <height>15</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Nombre:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lTipo">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>80</y>
+       <width>57</width>
+       <height>15</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Tipo:</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="cTipo">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>70</y>
+       <width>111</width>
+       <height>23</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="tNombre">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>30</y>
+       <width>113</width>
+       <height>23</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bCrear">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>110</y>
+       <width>80</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Crear</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="gTamagotchis">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>170</y>
+      <width>201</width>
+      <height>101</height>
+     </rect>
     </property>
+    <property name="title">
+     <string>Tamagotchis</string>
+    </property>
+    <widget class="QLabel" name="lElegir">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>57</width>
+       <height>15</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Elegir:</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="cTamagotchis">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>30</y>
+       <width>111</width>
+       <height>23</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bCambiar">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>70</y>
+       <width>80</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Cambiar</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="gEstado">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>10</y>
+      <width>431</width>
+      <height>241</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Estado</string>
+    </property>
+    <widget class="QLabel" name="lHealth">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>57</width>
+       <height>15</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>HP:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lHp">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>30</y>
+       <width>113</width>
+       <height>23</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="gActividades">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>70</y>
+       <width>411</width>
+       <height>161</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Actividades</string>
+     </property>
+     <widget class="QPushButton" name="bDesechos">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>30</y>
+        <width>80</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Desechos</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lHambre">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>70</y>
+        <width>61</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Hambre</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lSleep">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>70</y>
+        <width>61</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Sueño</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lDesechos">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>70</y>
+        <width>61</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Desechos</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bEnfermedad">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>30</y>
+        <width>80</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Enfermedad</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bSleep">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>30</y>
+        <width>80</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Sueño</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lEnfermedad">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>70</y>
+        <width>61</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Enfermedad</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bHambre">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>30</y>
+        <width>80</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Hambre</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="gCoins">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>280</y>
+      <width>181</width>
+      <height>131</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Coins</string>
+    </property>
+    <widget class="QLabel" name="lCoinsPersonales">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>91</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Personales:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lCoinsDonables">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>91</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Donables:</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bDonar">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>90</y>
+       <width>80</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dona el primer coin generado al Tamagotchi &lt;span style=&quot; font-weight:600;&quot;&gt;actualmente elegido&lt;/span&gt; en el combo box de &lt;span style=&quot; font-style:italic;&quot;&gt;elegir&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Donar</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="gLog">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>270</y>
+      <width>431</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Log</string>
+    </property>
+    <widget class="QLabel" name="lLog">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>411</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Log</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -36,7 +378,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
+     <width>844</width>
      <height>20</height>
     </rect>
    </property>
