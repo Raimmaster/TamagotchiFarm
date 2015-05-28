@@ -16,5 +16,5 @@ MyTimer::MyTimer(unsigned int* tiempo)
 void MyTimer::slotIncrement(){
     (*tiempo)++;
 
-    cout<<(*tiempo)<<endl;
+    //cout<<(*tiempo)<<endl;
 }

@@ -114,7 +114,7 @@ void MainWindow::on_bCrear_clicked()
 void MainWindow::on_bCambiar_clicked()
 {
     string nombre = ui->cTamagotchis->currentText().toStdString();
-
+    cout<<"TIEMPO ACTUAL: "<<*TIEMPO<<endl;
     Tamagotchi* temp = searchFarm(nombre);
 
     if(temp){
