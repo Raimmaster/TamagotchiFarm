@@ -1,15 +1,30 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+void init();
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    init();
+}
+
+/**
+ * @brief MainWindow::init - Inicialización de atributos necesarios en el form
+ */
+void MainWindow::init(){
     ui->lHambre->setText("---------\n---------\n---------\n---------\n---------");
     ui->lSleep->setText("---------\n---------\n---------\n---------\n---------");
     ui->lEnfermedad->setText("---------\n---------\n---------\n---------\n---------");
     ui->lDesechos->setText("---------\n---------\n---------\n---------\n---------");
+
+
+    QStringList listaTipos;
+    listaTipos<<"Wolf"<<"Ghost"<<"Snake";
+    //QString t = "Test";´
+    ui->cTipo->addItems(listaTipos);
 }
 
 MainWindow::~MainWindow()
@@ -39,3 +54,26 @@ MainWindow::~MainWindow()
     scene->setSceneRect(image.rect());
     ui->graphicsView->setScene(scene);
  */
+
+int MainWindow::tipoToInt(){
+    char tipo = ui->cTipo->currentText().toStdString().at(0);
+    cout<<tipo<<endl;
+    //W, G, S
+    switch(tipo){
+        case 'W':
+            return 0;
+        case 'G':
+            return 1;
+        case 'S':
+            return 2;
+    }
+}
+
+void MainWindow::on_bCrear_clicked()
+{
+    string nombre = ui->tNombre->text().toStdString();
+
+    if(!searchFarm(nombre)){
+        granja.push_back(new Tamagotchi(nombre, tipoToInt()));
+    }
+}
