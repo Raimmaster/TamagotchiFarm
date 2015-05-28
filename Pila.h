@@ -6,7 +6,7 @@
 template <typename Tipo>
 class Pila{
 private:
-    Nodo* tope = NULL;
+    Nodo<Tipo>* tope = NULL;
 
 public:
     Pila(){
@@ -49,6 +49,8 @@ public:
     bool agregar(Tipo valor){
         Nodo<Tipo>* n = new Nodo<Tipo>(valor);
         meter(n);
+
+        return true;
     }
 };
 

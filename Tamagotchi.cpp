@@ -28,6 +28,12 @@ Tamagotchi::Tamagotchi(string nombre, int tipo)
     this->nombre = nombre;
     this->tipo = tipo;
     setResistances();
+    hp = 100;
+    imagePath = "";
+}
+
+string Tamagotchi::getNombre(){
+    return nombre;
 }
 
 unsigned int Tamagotchi::getHp(){

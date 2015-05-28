@@ -66,7 +66,18 @@ int MainWindow::tipoToInt(){
             return 1;
         case 'S':
             return 2;
+        default:
+            return -1;
     }
+}
+
+bool MainWindow::searchFarm(string nombre){
+    for(unsigned int i = 0; i < granja.size(); i++){
+        if(granja[i]->getNombre() == nombre)
+            return true;
+    }
+
+    return false;
 }
 
 void MainWindow::on_bCrear_clicked()

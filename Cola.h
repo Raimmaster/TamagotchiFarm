@@ -5,14 +5,14 @@
 template <typename Tipo>
 class Cola{
 private:
-    Nodo* frente = NULL;
-    Nodo* ultimo = NULL;
+    Nodo<Tipo>* frente = NULL;
+    Nodo<Tipo>* ultimo = NULL;
 public:
     Cola(){
 
     }
 
-    Nodo* getFrente(){
+    Nodo<Tipo>* getFrente(){
         return frente;
     }
 

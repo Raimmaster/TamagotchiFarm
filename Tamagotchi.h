@@ -29,15 +29,16 @@ public:
 
     void setResistances();
 
+    string getNombre();
     unsigned int getHp();
     void checkResistances(int h, int s, int e, int d);
     void useCoin();
-    string imagePath = "";
+    string imagePath;
     ~Tamagotchi();//destroyer
 private:
     string nombre;
     int tipo;
-    unsigned int hp = 100;
+    unsigned int hp;
     int rHambre, rSleep, rEnfermedad, rDesechos;//resistencias
 };
 
