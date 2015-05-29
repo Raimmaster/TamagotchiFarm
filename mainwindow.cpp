@@ -29,6 +29,7 @@ void MainWindow::init(){
     ui->lCoinsPersonales->setText("Personales: 0");
     ui->lCoinsDonables->setText("Donables: 0");
 
+    actual = NULL;
     //Initialize timer
     TIEMPO = 0;
 
@@ -43,26 +44,55 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::checkStatus(){
+    if(!actual)
+        return;
+
     unsigned int randomPila = rand() % 4 + 1;
+    int topeActual = 0;
 
     switch(randomPila){
-        case 1:
-            actual->hambre.agregar(actual->hambre.getTope()->valor + 1);
+        case 1://hambre
+        topeActual = actual->hambre.getTope()->valor;
+        if(topeActual < 5){
+            actual->hambre.agregar(topeActual + 1);
+            ui->lHambre->setText(ui->lHambre->text() + "---------\n");
+        }
             break;
-        case 2:
+        case 2://sueño
+            topeActual = actual->sleep.getTope()->valor;
+            if(topeActual < 5){
+                actual->sleep.agregar(topeActual + 1);
+                ui->lSleep->setText(ui->lSleep->text() + "---------\n");
+            }
             break;
-        case 3:
+        case 3://enfermedad
+            topeActual = actual->enfermedad.getTope()->valor;
+            if(topeActual < 5){
+                actual->enfermedad.agregar(topeActual + 1);
+                ui->lEnfermedad->setText(ui->lEnfermedad->text() + "---------\n");
+            }
             break;
-        case 4:
+        case 4://desechos
+            topeActual = actual->desechos.getTope()->valor;
+            if(topeActual < 5){
+                actual->desechos.agregar(topeActual + 1);
+                ui->lDesechos->setText(ui->lDesechos->text() + "---------\n");
+            }
             break;
     }
+
+    int dHambre = actual->hambre.getTope()->valor;
+    int dSleep = actual->hambre.getTope()->valor;
+    int dEnfermedad = actual->hambre.getTope()->valor;
+    int dDesechos = actual->hambre.getTope()->valor;
+
+    actual->checkResistances(dHambre, dSleep, dEnfermedad, dDesechos);
 }
 
 void MainWindow::incrementCounter(){
     TIEMPO++;
     cout<<"Tiempo: "<<TIEMPO<<endl;
-
-
+    checkStatus();
 }
 
 /*How to add images

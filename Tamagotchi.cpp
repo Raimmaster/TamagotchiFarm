@@ -30,6 +30,10 @@ Tamagotchi::Tamagotchi(string nombre, int tipo)
     setResistances();
     hp = 100;
     imagePath = "";
+    hambre.agregar(0);
+    sleep.agregar(0);
+    enfermedad.agregar(0);
+    desechos.agregar(0);
 }
 
 string Tamagotchi::getNombre(){

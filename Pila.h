@@ -15,14 +15,7 @@ public:
 
     Nodo<Tipo>* getTope(){
         return tope;
-    }
-
-    void meter(Nodo<Tipo>* obj){
-        if(tope)
-            obj->anterior = tope;
-
-        tope = obj;
-    }
+    }   
 
     bool sacar(){
         if(tope){
@@ -51,6 +44,14 @@ public:
         meter(n);
 
         return true;
+    }
+
+private:
+    void meter(Nodo<Tipo>* obj){
+        if(tope)
+            obj->anterior = tope;
+
+        tope = obj;
     }
 };
 
