@@ -37,12 +37,13 @@ private:
     //Variables para almacenar una imagen
     QPixmap image;
     QImage  *imageObject;
-    QGraphicsScene *scene;
-    void init();
+    QGraphicsScene *scene;    
     vector<Tamagotchi*> granja;
     Tamagotchi* actual;
     QTimer* timer;
     unsigned int TIEMPO;
+    void init();
+    void checkStatus();
 };
 
 #endif // MAINWINDOW_H

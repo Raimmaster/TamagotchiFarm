@@ -15,10 +15,11 @@ MainWindow::MainWindow(QWidget *parent) :
  * @brief MainWindow::init - Inicialización de atributos necesarios en el form
  */
 void MainWindow::init(){
-    ui->lHambre->setText("---------\n---------\n---------\n---------\n---------");
-    ui->lSleep->setText("---------\n---------\n---------\n---------\n---------");
-    ui->lEnfermedad->setText("---------\n---------\n---------\n---------\n---------");
-    ui->lDesechos->setText("---------\n---------\n---------\n---------\n---------");
+    ui->lHambre->setText("");
+    //\n---------
+    ui->lSleep->setText("");
+    ui->lEnfermedad->setText("");
+    ui->lDesechos->setText("");
 
 
     QStringList listaTipos;
@@ -41,9 +42,27 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::checkStatus(){
+    unsigned int randomPila = rand() % 4 + 1;
+
+    switch(randomPila){
+        case 1:
+            actual->hambre.agregar(actual->hambre.getTope()->valor + 1);
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+    }
+}
+
 void MainWindow::incrementCounter(){
     TIEMPO++;
     cout<<"Tiempo: "<<TIEMPO<<endl;
+
+
 }
 
 /*How to add images
