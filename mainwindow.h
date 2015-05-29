@@ -6,8 +6,7 @@
 #include <QFileDialog>
 #include "Tamagotchi.h"
 #include <vector>
-
-#include "MyTimer.h"
+#include <QTimer>
 
 namespace Ui {
 class MainWindow;
@@ -42,9 +41,8 @@ private:
     void init();
     vector<Tamagotchi*> granja;
     Tamagotchi* actual;
-    //QTimer* timer;
-    MyTimer* timer;
-    unsigned int* TIEMPO;
+    QTimer* timer;
+    unsigned int TIEMPO;
 };
 
 #endif // MAINWINDOW_H

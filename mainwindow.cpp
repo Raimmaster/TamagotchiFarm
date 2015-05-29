@@ -7,9 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
-    MainWindow::TIEMPO = new unsigned int(0);
-
+    ui->setupUi(this);    
     init();
 }
 
@@ -31,7 +29,11 @@ void MainWindow::init(){
     ui->lCoinsDonables->setText("Donables: 0");
 
     //Initialize timer
-    timer = new MyTimer(TIEMPO);
+    TIEMPO = 0;
+
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(incrementCounter()));
+    timer->start(1000);
 }
 
 MainWindow::~MainWindow()
@@ -114,7 +116,7 @@ void MainWindow::on_bCrear_clicked()
 void MainWindow::on_bCambiar_clicked()
 {
     string nombre = ui->cTamagotchis->currentText().toStdString();
-    cout<<"TIEMPO ACTUAL: "<<*TIEMPO<<endl;
+    cout<<"TIEMPO ACTUAL: "<<TIEMPO<<endl;
     Tamagotchi* temp = searchFarm(nombre);
 
     if(temp){
