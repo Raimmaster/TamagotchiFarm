@@ -8,6 +8,7 @@
 #include <vector>
 #include <QTimer>
 #include <QMessageBox>
+#include "Mensaje.h"
 
 namespace Ui {
 class MainWindow;
@@ -69,6 +70,8 @@ private:
     void setlDesechosStatus();
     void setActivityLabelsStatus();
     void setCoinsLabels();
+    //Check logs
+    void actualizarVictorias();
     //blocks
     void changeActivitiesStatus();
     void blockEverything();

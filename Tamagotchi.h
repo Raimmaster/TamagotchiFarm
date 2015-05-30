@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Pila.h"
 #include "Cola.h"
+#include "Mensaje.h"
 
 using namespace std;
 
@@ -25,7 +26,7 @@ public:
     Tamagotchi(string nombre, int tipo);
     Pila<int> hambre, sleep, enfermedad, desechos;
     Cola<int> myCoins, giftCoins;
-    Cola<string> logros;
+    Cola<Mensaje*> logros;
 
     void setResistances();
 

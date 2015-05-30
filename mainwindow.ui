@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>690</width>
-    <height>477</height>
+    <height>490</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -394,7 +394,7 @@
       <x>230</x>
       <y>270</y>
       <width>431</width>
-      <height>141</height>
+      <height>171</height>
      </rect>
     </property>
     <property name="font">
@@ -410,13 +410,26 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>30</y>
+       <y>60</y>
        <width>411</width>
-       <height>101</height>
+       <height>91</height>
       </rect>
      </property>
      <property name="text">
       <string>Log</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lNewVictoria">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>411</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;New Victories:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </widget>

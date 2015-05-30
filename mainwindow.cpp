@@ -119,16 +119,38 @@ bool MainWindow::anyAtTop(){
     return false;
 }
 
+void MainWindow::actualizarVictorias(){
+    TIPO elTipo = LOSS;
+    do{
+        Mensaje* victMensaje = (Mensaje*)actual->logros.getFrente();
+        elTipo = victMensaje->getTipo();
+        if(elTipo == WIN){
+            log += (victMensaje->getMensaje());
+            cout<<"IN!"<<endl;
+            ui->lNewVictoria->setText(log);
+            cout<<log.toStdString()<<" TIPO: "<<elTipo<<endl;
+        }
+
+        cout<<log.toStdString()<<" TIPO: "<<elTipo<<endl;
+        actual->logros.quitarDeCola();
+    }while(elTipo == LOSS);
+}
+
 void MainWindow::checkVictory(){
     if(!anyAtTop()){
         int coinType = rand() % 3;
         actual->giftCoins.agregar(coinType);
         ui->lCoinsDonables->setText(QString("Donables: %1").arg(actual->giftCoins.size));
+        actual->logros.agregar(new Mensaje(QString("Has obtenido una victoria!"), WIN));//agregar victoria
+        actualizarVictorias();
     }
 }
 
 void MainWindow::checkLoss(){
-
+    if(anyAtTop()){
+        cout<<"YES!"<<endl;
+        actual->logros.agregar(new Mensaje(QString("Has obtenido una derrota."), LOSS));
+    }
 }
 
 void MainWindow::incrementCounter(){
@@ -261,6 +283,7 @@ void MainWindow::on_bCambiar_clicked()
     if(temp){
         actual = temp;
         setActivityLabelsStatus();
+        log = "";
         //Actualizar labels
         ui->pbHealth->setValue(actual->getHp());
         setCoinsLabels();
