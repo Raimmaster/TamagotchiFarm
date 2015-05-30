@@ -40,7 +40,7 @@ void MainWindow::init(){
 
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(incrementCounter()));
-    timer->start(5000);
+    timer->start(1000);
 }
 
 MainWindow::~MainWindow()
@@ -161,47 +161,35 @@ void MainWindow::updateComboElegir(){
 }
 
 void MainWindow::setlHambreStatus(){
-    if(actual->hambre.getTope()->valor > 0){
-        actual->hambre.sacar();
-        pHambre = "";
-        for(int i = 0; i < actual->hambre.getTope()->valor; i++)
-            pHambre += "---------\n";
+    pHambre = "";
+    for(int i = 0; i < actual->hambre.getTope()->valor; i++)
+        pHambre += "---------\n";
 
-        ui->lHambre->setText(pHambre);
-    }
+    ui->lHambre->setText(pHambre);
 }
 
 void MainWindow::setlSleepStatus(){
-    if(actual->sleep.getTope()->valor > 0){
-        actual->sleep.sacar();
-        pSleep = "";
-        for(int i = 0; i < actual->sleep.getTope()->valor; i++)
-            pSleep += "---------\n";
+    pSleep = "";
+    for(int i = 0; i < actual->sleep.getTope()->valor; i++)
+        pSleep += "---------\n";
 
-        ui->lSleep->setText(pSleep);
-    }
+    ui->lSleep->setText(pSleep);
 }
 
 void MainWindow::setlEnfermedadStatus(){
-    if(actual->enfermedad.getTope()->valor > 0){
-        actual->enfermedad.sacar();
-        pSleep = "";
-        for(int i = 0; i < actual->enfermedad.getTope()->valor; i++)
-            pSleep += "---------\n";
+    pSleep = "";
+    for(int i = 0; i < actual->enfermedad.getTope()->valor; i++)
+        pSleep += "---------\n";
 
-        ui->lEnfermedad->setText(pSleep);
-    }
+    ui->lEnfermedad->setText(pSleep);
 }
 
 void MainWindow::setlDesechosStatus(){
-    if(actual->desechos.getTope()->valor > 0){
-        actual->desechos.sacar();
-        pDesechos = "";
-        for(int i = 0; i < actual->desechos.getTope()->valor; i++)
-            pDesechos += "---------\n";
+    pDesechos = "";
+    for(int i = 0; i < actual->desechos.getTope()->valor; i++)
+        pDesechos += "---------\n";
 
-        ui->lDesechos->setText(pDesechos);
-    }
+    ui->lDesechos->setText(pDesechos);
 }
 
 void MainWindow::setActivityLabelsStatus(){
@@ -230,6 +218,8 @@ void MainWindow::on_bCambiar_clicked()
 
     if(temp){
         actual = temp;
+        setActivityLabelsStatus();
+        ui->pbHealth->setValue(actual->getHp());
         cout<<actual->getNombre()<< " HP: "<<actual->getHp()<<endl;
     }
 }
@@ -239,13 +229,19 @@ void MainWindow::on_bHambre_clicked()
     if(!actual)
         return;
 
+    if(actual->hambre.getTope()->valor > 0)
+        actual->hambre.sacar();
+
     setlHambreStatus();
 }
 
 void MainWindow::on_bSleep_clicked()
 {
     if(!actual)
-        return;
+        return;    
+
+    if(actual->sleep.getTope()->valor > 0)
+        actual->sleep.sacar();
 
     setlSleepStatus();
 }
@@ -255,6 +251,9 @@ void MainWindow::on_bEnfermedad_clicked()
     if(!actual)
         return;
 
+    if(actual->enfermedad.getTope()->valor > 0)
+        actual->enfermedad.sacar();
+
     setlEnfermedadStatus();
 }
 
@@ -262,6 +261,9 @@ void MainWindow::on_bDesechos_clicked()
 {
     if(!actual)
         return;
+
+    if(actual->desechos.getTope()->valor > 0)
+        actual->desechos.sacar();
 
     setlDesechosStatus();
 }
