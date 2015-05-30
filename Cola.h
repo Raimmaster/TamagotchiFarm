@@ -8,8 +8,9 @@ private:
     Nodo<Tipo>* frente = NULL;
     Nodo<Tipo>* ultimo = NULL;
 public:
+    unsigned int size;
     Cola(){
-
+        size = 0;
     }
 
     Nodo<Tipo>* getFrente(){
@@ -22,16 +23,6 @@ public:
 
         return true;
     }
-    void ponerEnCola(Nodo<Tipo>* n){
-        if(!frente){
-            frente = n;
-            ultimo = n;
-            return;
-        }
-
-        ultimo->anterior = n;
-        ultimo = n;
-    }
 
     bool quitarDeCola(){
         Nodo<Tipo>* temp;
@@ -39,6 +30,8 @@ public:
             temp = frente;
             frente = frente->anterior;
             delete temp;
+            size--;
+
             return true;
         }
 
@@ -59,6 +52,19 @@ public:
         ponerEnCola(n);
 
         return true;
+    }
+
+private:
+    void ponerEnCola(Nodo<Tipo>* n){
+        if(!frente){
+            frente = n;
+            ultimo = n;
+            return;
+        }
+
+        ultimo->anterior = n;
+        ultimo = n;
+        size++;
     }
 };
 

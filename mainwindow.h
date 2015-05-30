@@ -7,6 +7,7 @@
 #include "Tamagotchi.h"
 #include <vector>
 #include <QTimer>
+#include <QMessageBox>
 
 namespace Ui {
 class MainWindow;
@@ -18,7 +19,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    const static unsigned int TIEMPO_VICTORIA = 8, LOSE_TIME = 5;
+    const static unsigned int TIEMPO_VICTORIA = 8, LOSE_TIME = 5, CHECK_TIME = 5, TOPE_ACTIVIDADES = 5;
     int tipoToInt();
     Tamagotchi* searchFarm(string nombre);
     void updateComboElegir();
@@ -40,24 +41,34 @@ private slots:
 
     void on_bDesechos_clicked();
 
+    void on_bDonar_clicked();
+
 private:
     Ui::MainWindow *ui;
     //Variables para almacenar una imagen
     QPixmap image;
     QImage  *imageObject;
-    QGraphicsScene *scene;    
+    QGraphicsScene *scene;
+    //Granja, valores de estado, timers
     vector<Tamagotchi*> granja;
     Tamagotchi* actual;
     QTimer* timer;
     QString pHambre, pSleep, pEnfermedad, pDesechos;
+    QString log;
     unsigned int TIEMPO;
+    //Funciones
     void init();
     void checkStatus();
+    void checkVictory();
+    void checkLoss();
+    bool anyAtTop();
+    //Check activity labels
     void setlHambreStatus();
     void setlSleepStatus();
     void setlEnfermedadStatus();
     void setlDesechosStatus();
     void setActivityLabelsStatus();
+    void setCoinsLabels();
 };
 
 #endif // MAINWINDOW_H

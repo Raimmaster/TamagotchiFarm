@@ -35,6 +35,10 @@ void MainWindow::init(){
     pSleep = "";
     pEnfermedad = "";
     pDesechos = "";
+
+    //Log
+    log = "";
+    ui->lLog->setText(log);
     //Initialize timer
     TIEMPO = 0;
 
@@ -53,12 +57,12 @@ void MainWindow::checkStatus(){
         return;
 
     unsigned int randomPila = rand() % 4 + 1;
-    int topeActual = 0;
+    unsigned int topeActual = 0;
 
     switch(randomPila){
         case 1://hambre
         topeActual = actual->hambre.getTope()->valor;
-        if(topeActual < 5){
+        if(topeActual < TOPE_ACTIVIDADES){
             actual->hambre.agregar(topeActual + 1);
             pHambre += "---------\n";
             ui->lHambre->setText(pHambre);
@@ -66,21 +70,21 @@ void MainWindow::checkStatus(){
             break;
         case 2://sueño
             topeActual = actual->sleep.getTope()->valor;
-            if(topeActual < 5){
+            if(topeActual < TOPE_ACTIVIDADES){
                 actual->sleep.agregar(topeActual + 1);
                 ui->lSleep->setText(ui->lSleep->text() + "---------\n");
             }
             break;
         case 3://enfermedad
             topeActual = actual->enfermedad.getTope()->valor;
-            if(topeActual < 5){
+            if(topeActual < TOPE_ACTIVIDADES){
                 actual->enfermedad.agregar(topeActual + 1);
                 ui->lEnfermedad->setText(ui->lEnfermedad->text() + "---------\n");
             }
             break;
         case 4://desechos
             topeActual = actual->desechos.getTope()->valor;
-            if(topeActual < 5){
+            if(topeActual < TOPE_ACTIVIDADES){
                 actual->desechos.agregar(topeActual + 1);
                 ui->lDesechos->setText(ui->lDesechos->text() + "---------\n");
             }
@@ -96,36 +100,52 @@ void MainWindow::checkStatus(){
     ui->pbHealth->setValue(actual->getHp());
 }
 
+bool MainWindow::anyAtTop(){
+    if(!actual)
+        return false ;
+
+    int topHambre = actual->hambre.getTope()->valor;
+    int topSleep = actual->sleep.getTope()->valor;
+    int topEnfermedad = actual->enfermedad.getTope()->valor;
+    int topDesechos = actual->desechos.getTope()->valor;
+
+    if(topHambre == TOPE_ACTIVIDADES || topSleep == TOPE_ACTIVIDADES
+            || topEnfermedad == TOPE_ACTIVIDADES || topDesechos == TOPE_ACTIVIDADES)
+        return true;
+
+    return false;
+}
+
+void MainWindow::checkVictory(){
+    if(!anyAtTop()){
+        int coinType = rand() % 3;
+        actual->giftCoins.agregar(coinType);
+        ui->lCoinsDonables->setText(QString("Donables: %1").arg(actual->giftCoins.size));
+    }
+}
+
+void MainWindow::checkLoss(){
+
+}
+
 void MainWindow::incrementCounter(){
     TIEMPO++;
-    //cout<<"Tiempo: "<<TIEMPO<<endl;
-    checkStatus();
+
+    if(!actual)
+        return;
+
+    if(TIEMPO % CHECK_TIME == 0)
+        checkStatus();
+
+    if(TIEMPO % TIEMPO_VICTORIA == 0)
+        checkVictory();
+
+    if(TIEMPO % LOSE_TIME == 0)
+        checkLoss();
+
     if(actual)
         cout<<"My HP: "<<actual->getHp()<<endl;
 }
-
-/*How to add images
- *
- QString imagePath = QFileDialog::getOpenFileName(
-    this,
-    tr("Open File"),
-    "",
-    tr("JPEG (*.jpg *.jpeg);;PNG (*.png)")
-    );
-
-    QString imagePath = "./Assets/Ghost/Ghost1.png";
-    QDir d(imagePath);
-
-    imagePath = d.relativeFilePath(imagePath);
-
-    imageObject = new QImage();
-    imageObject->load(imagePath);
-    image = QPixmap::fromImage(*imageObject);
-    scene = new QGraphicsScene(this);
-    scene->addPixmap(image);
-    scene->setSceneRect(image.rect());
-    ui->graphicsView->setScene(scene);
- */
 
 int MainWindow::tipoToInt(){
     char tipo = ui->cTipo->currentText().toStdString().at(0);
@@ -199,6 +219,11 @@ void MainWindow::setActivityLabelsStatus(){
     setlDesechosStatus();
 }
 
+void MainWindow::setCoinsLabels(){
+    ui->lCoinsDonables->setText(QString("Donables: %1").arg(actual->giftCoins.size));
+    ui->lCoinsPersonales->setText(QString("Personales: %1").arg(actual->myCoins.size));
+}
+
 void MainWindow::on_bCrear_clicked()
 {
     string nombre = ui->tNombre->text().toStdString();
@@ -213,14 +238,14 @@ void MainWindow::on_bCrear_clicked()
 void MainWindow::on_bCambiar_clicked()
 {
     string nombre = ui->cTamagotchis->currentText().toStdString();
-    cout<<"TIEMPO ACTUAL: "<<TIEMPO<<endl;
     Tamagotchi* temp = searchFarm(nombre);
 
     if(temp){
         actual = temp;
         setActivityLabelsStatus();
+        //Actualizar labels
         ui->pbHealth->setValue(actual->getHp());
-        cout<<actual->getNombre()<< " HP: "<<actual->getHp()<<endl;
+        ui->lCoinsPersonales->setText(QString("Personales: %1").arg(actual->giftCoins.size));
     }
 }
 
@@ -266,4 +291,43 @@ void MainWindow::on_bDesechos_clicked()
         actual->desechos.sacar();
 
     setlDesechosStatus();
+}
+
+/*How to add images
+ *
+ QString imagePath = QFileDialog::getOpenFileName(
+    this,
+    tr("Open File"),
+    "",
+    tr("JPEG (*.jpg *.jpeg);;PNG (*.png)")
+    );
+
+    QString imagePath = "./Assets/Ghost/Ghost1.png";
+    QDir d(imagePath);
+
+    imagePath = d.relativeFilePath(imagePath);
+
+    imageObject = new QImage();
+    imageObject->load(imagePath);
+    image = QPixmap::fromImage(*imageObject);
+    scene = new QGraphicsScene(this);
+    scene->addPixmap(image);
+    scene->setSceneRect(image.rect());
+    ui->graphicsView->setScene(scene);
+ */
+
+void MainWindow::on_bDonar_clicked()
+{
+    if(!actual)
+        return;
+
+    string nombre = ui->cTamagotchis->currentText().toStdString();
+
+    if(nombre != actual->getNombre() && actual->giftCoins.size > 0){
+        Tamagotchi* temp = searchFarm(nombre);
+        temp->myCoins.agregar(actual->giftCoins.getFrente()->valor);
+        actual->giftCoins.quitarDeCola();
+        setCoinsLabels();
+    }
+
 }
