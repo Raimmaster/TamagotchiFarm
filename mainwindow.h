@@ -69,6 +69,9 @@ private:
     void setlDesechosStatus();
     void setActivityLabelsStatus();
     void setCoinsLabels();
+    //blocks
+    void changeActivitiesStatus();
+    void blockEverything();
 };
 
 #endif // MAINWINDOW_H

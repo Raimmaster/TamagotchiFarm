@@ -50,6 +50,7 @@ public:
     bool agregar(Tipo valor){
         Nodo<Tipo>* n = new Nodo<Tipo>(valor);
         ponerEnCola(n);
+        size++;
 
         return true;
     }
@@ -63,8 +64,7 @@ private:
         }
 
         ultimo->anterior = n;
-        ultimo = n;
-        size++;
+        ultimo = n;        
     }
 };
 

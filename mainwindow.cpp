@@ -97,6 +97,9 @@ void MainWindow::checkStatus(){
     int dDesechos = actual->desechos.getTope()->valor;
 
     actual->checkResistances(dHambre, dSleep, dEnfermedad, dDesechos);
+    if(actual->getHp() == 0)
+        blockEverything();
+
     ui->pbHealth->setValue(actual->getHp());
 }
 
@@ -129,10 +132,10 @@ void MainWindow::checkLoss(){
 }
 
 void MainWindow::incrementCounter(){
-    TIEMPO++;
-
-    if(!actual)
+    if(!actual || actual->getHp() == 0)
         return;
+
+    TIEMPO++;
 
     if(TIEMPO % CHECK_TIME == 0)
         checkStatus();
@@ -142,9 +145,6 @@ void MainWindow::incrementCounter(){
 
     if(TIEMPO % LOSE_TIME == 0)
         checkLoss();
-
-    if(actual)
-        cout<<"My HP: "<<actual->getHp()<<endl;
 }
 
 int MainWindow::tipoToInt(){
@@ -224,6 +224,24 @@ void MainWindow::setCoinsLabels(){
     ui->lCoinsPersonales->setText(QString("Personales: %1").arg(actual->myCoins.size));
 }
 
+void MainWindow::changeActivitiesStatus(){
+    ui->bHambre->setEnabled(!ui->bHambre->isEnabled());
+    ui->bSleep->setEnabled(!ui->bSleep->isEnabled());
+    ui->bEnfermedad->setEnabled(!ui->bEnfermedad->isEnabled());
+    ui->bDesechos->setEnabled(!ui->bDesechos->isEnabled());
+}
+
+void MainWindow::blockEverything(){
+    bool isAlive = actual->getHp() > 0 ? true : false;
+
+    ui->bHambre->setEnabled(isAlive);
+    ui->bSleep->setEnabled(isAlive);
+    ui->bEnfermedad->setEnabled(isAlive);
+    ui->bDesechos->setEnabled(isAlive);
+
+    ui->bDonar->setEnabled(isAlive);
+}
+
 void MainWindow::on_bCrear_clicked()
 {
     string nombre = ui->tNombre->text().toStdString();
@@ -245,7 +263,8 @@ void MainWindow::on_bCambiar_clicked()
         setActivityLabelsStatus();
         //Actualizar labels
         ui->pbHealth->setValue(actual->getHp());
-        ui->lCoinsPersonales->setText(QString("Personales: %1").arg(actual->giftCoins.size));
+        setCoinsLabels();
+        blockEverything();
     }
 }
 
