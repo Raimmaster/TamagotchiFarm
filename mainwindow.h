@@ -53,6 +53,11 @@ private:
     unsigned int TIEMPO;
     void init();
     void checkStatus();
+    void setlHambreStatus();
+    void setlSleepStatus();
+    void setlEnfermedadStatus();
+    void setlDesechosStatus();
+    void setActivityLabelsStatus();
 };
 
 #endif // MAINWINDOW_H
