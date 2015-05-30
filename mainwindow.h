@@ -19,7 +19,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    const static unsigned int TIEMPO_VICTORIA = 8, LOSE_TIME = 5, CHECK_TIME = 5, TOPE_ACTIVIDADES = 5;
+    const static unsigned int TIEMPO_VICTORIA = 8, LOSE_TIME = 5, CHECK_TIME = 5, TOPE_ACTIVIDADES = 5, LOAD_TIME = 6;
     int tipoToInt();
     Tamagotchi* searchFarm(string nombre);
     void updateComboElegir();
@@ -43,6 +43,8 @@ private slots:
 
     void on_bDonar_clicked();
 
+    void on_bUsar_clicked();
+
 private:
     Ui::MainWindow *ui;
     //Variables para almacenar una imagen
@@ -55,6 +57,7 @@ private:
     QTimer* timer;
     QString pHambre, pSleep, pEnfermedad, pDesechos;
     QString log;
+    bool pressedActivity;
     unsigned int TIEMPO;
     unsigned int cantidadLogs;
     //Funciones

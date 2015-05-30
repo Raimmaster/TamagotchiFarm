@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-const int VICT = 0, LOST = 1;
+const int VICT = 0, LOST = 1;//constantes para ingresar el mensaje del log, gane o derrota
 void init();
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -31,6 +31,7 @@ void MainWindow::init(){
     ui->lCoinsDonables->setText("Donables: 0");
 
     actual = NULL;
+    pressedActivity = false;
     //QStrings para las pilas
     pHambre = "";
     pSleep = "";
@@ -143,7 +144,7 @@ void MainWindow::actualizarVictorias(){
 
 void MainWindow::checkVictory(){
     if(!anyAtTop()){
-        int coinType = rand() % 3;
+        int coinType = rand() % 4;
         actual->giftCoins.agregar(coinType);
         ui->lCoinsDonables->setText(QString("Donables: %1").arg(actual->giftCoins.size));
         actual->logros.agregar(VICT);//agregar victoria
@@ -173,6 +174,11 @@ void MainWindow::incrementCounter(){
 
     if(TIEMPO % LOSE_TIME == 0)
         checkLoss();
+
+    if(pressedActivity && TIEMPO % LOAD_TIME == 0){
+        pressedActivity = false;
+        changeActivitiesStatus();
+    }
 }
 
 int MainWindow::tipoToInt(){
@@ -293,6 +299,10 @@ void MainWindow::on_bCambiar_clicked()
         ui->pbHealth->setValue(actual->getHp());
         setCoinsLabels();
         blockEverything();
+        ui->lLog->setText("");
+        ui->lNewVictoria->setText("");
+        cantidadLogs = 0;
+        pressedActivity = false;
     }
 }
 
@@ -301,8 +311,11 @@ void MainWindow::on_bHambre_clicked()
     if(!actual)
         return;
 
-    if(actual->hambre.getTope()->valor > 0)
+    if(actual->hambre.getTope()->valor > 0){
         actual->hambre.sacar();
+        pressedActivity = true;
+        changeActivitiesStatus();
+    }
 
     setlHambreStatus();
 }
@@ -340,6 +353,58 @@ void MainWindow::on_bDesechos_clicked()
     setlDesechosStatus();
 }
 
+void MainWindow::on_bDonar_clicked()
+{
+    if(!actual)
+        return;
+
+    string nombre = ui->cTamagotchis->currentText().toStdString();
+
+    if(nombre != actual->getNombre() && actual->giftCoins.size > 0){
+        Tamagotchi* temp = searchFarm(nombre);
+        temp->myCoins.agregar(actual->giftCoins.getFrente()->valor);
+        actual->giftCoins.quitarDeCola();
+        setCoinsLabels();
+    }
+
+}
+
+void MainWindow::on_bUsar_clicked()
+{
+    if(!actual)
+        return;
+
+    if(actual->myCoins.getFrente()){
+        int coin = actual->myCoins.getFrente()->valor;
+
+        switch(coin){
+            case 0://hambre
+                actual->hambre.anular();
+                actual->hambre.agregar(0);
+                setlHambreStatus();
+                break;
+            case 1://sueño
+                actual->sleep.anular();
+                actual->sleep.agregar(0);
+                setlSleepStatus();
+                break;
+            case 2://enfermedad
+                actual->enfermedad.anular();
+                actual->enfermedad.agregar(0);
+                setlEnfermedadStatus();
+                break;
+            case 3://desechos
+                actual->desechos.anular();
+                actual->desechos.agregar(0);
+                setlDesechosStatus();
+                break;
+        }
+
+        actual->myCoins.quitarDeCola();
+        setCoinsLabels();
+    }
+}
+
 /*How to add images
  *
  QString imagePath = QFileDialog::getOpenFileName(
@@ -362,19 +427,3 @@ void MainWindow::on_bDesechos_clicked()
     scene->setSceneRect(image.rect());
     ui->graphicsView->setScene(scene);
  */
-
-void MainWindow::on_bDonar_clicked()
-{
-    if(!actual)
-        return;
-
-    string nombre = ui->cTamagotchis->currentText().toStdString();
-
-    if(nombre != actual->getNombre() && actual->giftCoins.size > 0){
-        Tamagotchi* temp = searchFarm(nombre);
-        temp->myCoins.agregar(actual->giftCoins.getFrente()->valor);
-        actual->giftCoins.quitarDeCola();
-        setCoinsLabels();
-    }
-
-}

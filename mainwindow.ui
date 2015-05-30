@@ -332,7 +332,7 @@
      <rect>
       <x>10</x>
       <y>280</y>
-      <width>181</width>
+      <width>201</width>
       <height>131</height>
      </rect>
     </property>
@@ -374,7 +374,7 @@
     <widget class="QPushButton" name="bDonar">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>10</x>
        <y>90</y>
        <width>80</width>
        <height>23</height>
@@ -385,6 +385,22 @@
      </property>
      <property name="text">
       <string>Donar</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bUsar">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>90</y>
+       <width>80</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dona el primer coin generado al Tamagotchi &lt;span style=&quot; font-weight:600;&quot;&gt;actualmente elegido&lt;/span&gt; en el combo box de &lt;span style=&quot; font-style:italic;&quot;&gt;elegir&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Usar</string>
      </property>
     </widget>
    </widget>
