@@ -88,9 +88,9 @@ void MainWindow::checkStatus(){
     }
 
     int dHambre = actual->hambre.getTope()->valor;
-    int dSleep = actual->hambre.getTope()->valor;
-    int dEnfermedad = actual->hambre.getTope()->valor;
-    int dDesechos = actual->hambre.getTope()->valor;
+    int dSleep = actual->sleep.getTope()->valor;
+    int dEnfermedad = actual->enfermedad.getTope()->valor;
+    int dDesechos = actual->desechos.getTope()->valor;
 
     actual->checkResistances(dHambre, dSleep, dEnfermedad, dDesechos);
     ui->pbHealth->setValue(actual->getHp());
@@ -98,7 +98,7 @@ void MainWindow::checkStatus(){
 
 void MainWindow::incrementCounter(){
     TIEMPO++;
-    cout<<"Tiempo: "<<TIEMPO<<endl;
+    //cout<<"Tiempo: "<<TIEMPO<<endl;
     checkStatus();
     if(actual)
         cout<<"My HP: "<<actual->getHp()<<endl;
