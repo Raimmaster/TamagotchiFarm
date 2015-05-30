@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+const int VICT = 0, LOSE = 1;
 void init();
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -120,20 +121,19 @@ bool MainWindow::anyAtTop(){
 }
 
 void MainWindow::actualizarVictorias(){
-    TIPO elTipo = LOSS;
+    int elTipo = LOSE;
     do{
         Mensaje* victMensaje = (Mensaje*)actual->logros.getFrente();
         elTipo = victMensaje->getTipo();
-        if(elTipo == WIN){
-            log += (victMensaje->getMensaje());
+        if(elTipo == VICT){
+            log += victMensaje->getMensaje();
             cout<<"IN!"<<endl;
             ui->lNewVictoria->setText(log);
-            cout<<log.toStdString()<<" TIPO: "<<elTipo<<endl;
         }
 
         cout<<log.toStdString()<<" TIPO: "<<elTipo<<endl;
         actual->logros.quitarDeCola();
-    }while(elTipo == LOSS);
+    }while(elTipo == LOSE);
 }
 
 void MainWindow::checkVictory(){
@@ -141,7 +141,7 @@ void MainWindow::checkVictory(){
         int coinType = rand() % 3;
         actual->giftCoins.agregar(coinType);
         ui->lCoinsDonables->setText(QString("Donables: %1").arg(actual->giftCoins.size));
-        actual->logros.agregar(new Mensaje(QString("Has obtenido una victoria!"), WIN));//agregar victoria
+        actual->logros.agregar(new Mensaje(QString("Has obtenido una victoria!")), VICT);//agregar victoria
         actualizarVictorias();
     }
 }
@@ -149,7 +149,7 @@ void MainWindow::checkVictory(){
 void MainWindow::checkLoss(){
     if(anyAtTop()){
         cout<<"YES!"<<endl;
-        actual->logros.agregar(new Mensaje(QString("Has obtenido una derrota."), LOSS));
+        actual->logros.agregar(new Mensaje(QString("Has obtenido una derrota.")), LOSE);
     }
 }
 

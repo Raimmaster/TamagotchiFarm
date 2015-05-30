@@ -1,6 +1,6 @@
 #include "Mensaje.h"
 
-Mensaje::Mensaje(QString mensaje, TIPO tipo)
+Mensaje::Mensaje(QString mensaje, int tipo)
 {
     this->mensaje = mensaje;
     this->tipo = tipo;
@@ -10,6 +10,6 @@ QString Mensaje::getMensaje(){
     return mensaje;
 }
 
-TIPO Mensaje::getTipo(){
+int Mensaje::getTipo(){
     return tipo;
 }

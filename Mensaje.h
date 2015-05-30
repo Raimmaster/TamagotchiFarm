@@ -12,12 +12,13 @@ enum TIPO{
 class Mensaje
 {
 public:
-    Mensaje(QString mensaje, TIPO tipo);
+    Mensaje(QString mensaje, int tipo);
     QString getMensaje();
-    TIPO getTipo();
+    int getTipo();
+    const static int WIN = 0, LOSS = 1;
 private:
     QString mensaje;
-    TIPO tipo;
+    int tipo;
 };
 
 #endif // MENSAJES_H
