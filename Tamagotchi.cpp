@@ -67,6 +67,8 @@ void Tamagotchi::checkResistances(int h, int s, int e, int d){
         d = 0;
 
     hp -= (h + s + e + d);//disminuir vida menos la suma de todos los valores de daño
+    if(hp < 0)
+        hp = 0;
 }
 
 /**

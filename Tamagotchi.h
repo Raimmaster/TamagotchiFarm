@@ -39,7 +39,7 @@ public:
 private:
     string nombre;
     int tipo;
-    unsigned int hp;
+    int hp;
     int rHambre, rSleep, rEnfermedad, rDesechos;//resistencias
 };
 

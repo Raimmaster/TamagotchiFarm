@@ -32,6 +32,14 @@ private slots:
 
     void on_bCambiar_clicked();
 
+    void on_bHambre_clicked();
+
+    void on_bSleep_clicked();
+
+    void on_bEnfermedad_clicked();
+
+    void on_bDesechos_clicked();
+
 private:
     Ui::MainWindow *ui;
     //Variables para almacenar una imagen
@@ -41,6 +49,7 @@ private:
     vector<Tamagotchi*> granja;
     Tamagotchi* actual;
     QTimer* timer;
+    QString pHambre, pSleep, pEnfermedad, pDesechos;
     unsigned int TIEMPO;
     void init();
     void checkStatus();

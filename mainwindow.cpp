@@ -30,6 +30,11 @@ void MainWindow::init(){
     ui->lCoinsDonables->setText("Donables: 0");
 
     actual = NULL;
+    //QStrings para las pilas
+    pHambre = "";
+    pSleep = "";
+    pEnfermedad = "";
+    pDesechos = "";
     //Initialize timer
     TIEMPO = 0;
 
@@ -55,7 +60,8 @@ void MainWindow::checkStatus(){
         topeActual = actual->hambre.getTope()->valor;
         if(topeActual < 5){
             actual->hambre.agregar(topeActual + 1);
-            ui->lHambre->setText(ui->lHambre->text() + "---------\n");
+            pHambre += "---------\n";
+            ui->lHambre->setText(pHambre);
         }
             break;
         case 2://sueño
@@ -87,12 +93,15 @@ void MainWindow::checkStatus(){
     int dDesechos = actual->hambre.getTope()->valor;
 
     actual->checkResistances(dHambre, dSleep, dEnfermedad, dDesechos);
+    ui->pbHealth->setValue(actual->getHp());
 }
 
 void MainWindow::incrementCounter(){
     TIEMPO++;
     cout<<"Tiempo: "<<TIEMPO<<endl;
     checkStatus();
+    if(actual)
+        cout<<"My HP: "<<actual->getHp()<<endl;
 }
 
 /*How to add images
@@ -171,5 +180,70 @@ void MainWindow::on_bCambiar_clicked()
     if(temp){
         actual = temp;
         cout<<actual->getNombre()<< " HP: "<<actual->getHp()<<endl;
+    }
+}
+
+void MainWindow::on_bHambre_clicked()
+{
+    if(!actual)
+        return;
+
+    if(actual->hambre.getTope()->valor > 0){
+        actual->hambre.sacar();
+        pHambre = "";
+        for(int i = 0; i < actual->hambre.getTope()->valor
+            && actual->hambre.getTope()->valor > 0; i++)
+            pHambre += "---------\n";
+
+        ui->lHambre->setText(pHambre);
+    }
+
+}
+
+void MainWindow::on_bSleep_clicked()
+{
+    if(!actual)
+        return;
+
+    if(actual->sleep.getTope()->valor > 0){
+        actual->sleep.sacar();
+        pSleep = "";
+        for(int i = 0; i < actual->sleep.getTope()->valor
+            && actual->sleep.getTope()->valor > 0; i++)
+            pSleep += "---------\n";
+
+        ui->lSleep->setText(pSleep);
+    }
+}
+
+void MainWindow::on_bEnfermedad_clicked()
+{
+    if(!actual)
+        return;
+
+    if(actual->enfermedad.getTope()->valor > 0){
+        actual->enfermedad.sacar();
+        pSleep = "";
+        for(int i = 0; i < actual->enfermedad.getTope()->valor
+            && actual->enfermedad.getTope()->valor > 0; i++)
+            pSleep += "---------\n";
+
+        ui->lEnfermedad->setText(pSleep);
+    }
+}
+
+void MainWindow::on_bDesechos_clicked()
+{
+    if(!actual)
+        return;
+
+    if(actual->desechos.getTope()->valor > 0){
+        actual->desechos.sacar();
+        pDesechos = "";
+        for(int i = 0; i < actual->desechos.getTope()->valor
+            && actual->desechos.getTope()->valor > 0; i++)
+            pDesechos += "---------\n";
+
+        ui->lDesechos->setText(pDesechos);
     }
 }
