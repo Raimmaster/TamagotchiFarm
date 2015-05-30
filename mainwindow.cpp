@@ -325,8 +325,11 @@ void MainWindow::on_bSleep_clicked()
     if(!actual)
         return;    
 
-    if(actual->sleep.getTope()->valor > 0)
+    if(actual->sleep.getTope()->valor > 0){
         actual->sleep.sacar();
+        pressedActivity = true;
+        changeActivitiesStatus();
+    }
 
     setlSleepStatus();
 }
@@ -336,8 +339,11 @@ void MainWindow::on_bEnfermedad_clicked()
     if(!actual)
         return;
 
-    if(actual->enfermedad.getTope()->valor > 0)
+    if(actual->enfermedad.getTope()->valor > 0){
         actual->enfermedad.sacar();
+        pressedActivity = true;
+        changeActivitiesStatus();
+    }
 
     setlEnfermedadStatus();
 }
@@ -347,8 +353,11 @@ void MainWindow::on_bDesechos_clicked()
     if(!actual)
         return;
 
-    if(actual->desechos.getTope()->valor > 0)
+    if(actual->desechos.getTope()->valor > 0){
         actual->desechos.sacar();
+        pressedActivity = true;
+        changeActivitiesStatus();
+    }
 
     setlDesechosStatus();
 }
