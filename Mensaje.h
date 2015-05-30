@@ -1,6 +1,8 @@
-#ifndef MENSAJES_H
-#define MENSAJES_H
+#ifndef MENSAJE_H
+#define MENSAJE_H
+
 #include <QString>
+#include <iostream>
 
 using namespace std;
 
@@ -12,13 +14,13 @@ enum TIPO{
 class Mensaje
 {
 public:
-    Mensaje(QString mensaje, int tipo);
-    QString getMensaje();
+    Mensaje(string mess, int tipo);
+    string getMensaje();
     int getTipo();
     const static int WIN = 0, LOSS = 1;
 private:
-    QString mensaje;
+    string mensaje;
     int tipo;
 };
 
-#endif // MENSAJES_H
+#endif // MENSAJE_H

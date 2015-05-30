@@ -1,13 +1,13 @@
 #include "Mensaje.h"
 
-Mensaje::Mensaje(QString mensaje, int tipo)
+Mensaje::Mensaje(string mess, int tipo)
 {
-    this->mensaje = mensaje;
+    this->mensaje = mess;
     this->tipo = tipo;
 }
 
-QString Mensaje::getMensaje(){
-    return mensaje;
+string Mensaje::getMensaje(){
+    return this->mensaje;
 }
 
 int Mensaje::getTipo(){

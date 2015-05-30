@@ -26,7 +26,7 @@ public:
     Tamagotchi(string nombre, int tipo);
     Pila<int> hambre, sleep, enfermedad, desechos;
     Cola<int> myCoins, giftCoins;
-    Cola<Mensaje*> logros;
+    Cola<int> logros;
 
     void setResistances();
 

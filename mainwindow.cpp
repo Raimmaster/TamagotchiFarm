@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-const int VICT = 0, LOSE = 1;
+const int VICT = 0, LOST = 1;
 void init();
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -38,6 +38,7 @@ void MainWindow::init(){
     pDesechos = "";
 
     //Log
+    cantidadLogs = 0;
     log = "";
     ui->lLog->setText(log);
     //Initialize timer
@@ -121,19 +122,23 @@ bool MainWindow::anyAtTop(){
 }
 
 void MainWindow::actualizarVictorias(){
-    int elTipo = LOSE;
+    int elTipo = LOST;
     do{
-        Mensaje* victMensaje = (Mensaje*)actual->logros.getFrente();
-        elTipo = victMensaje->getTipo();
-        if(elTipo == VICT){
-            log += victMensaje->getMensaje();
-            cout<<"IN!"<<endl;
-            ui->lNewVictoria->setText(log);
+        elTipo = actual->logros.getFrente()->valor;
+        if(cantidadLogs == 5){//check if log is full
+            cantidadLogs = 0;
+            log = "";
         }
 
-        cout<<log.toStdString()<<" TIPO: "<<elTipo<<endl;
+        if(elTipo == VICT){
+            QString nVictoria = "Has adquirido una victoria!";
+            log += nVictoria + "\n";
+            ui->lNewVictoria->setText(nVictoria);
+        }        
+
+        ui->lLog->setText(log);
         actual->logros.quitarDeCola();
-    }while(elTipo == LOSE);
+    }while(elTipo == LOST);
 }
 
 void MainWindow::checkVictory(){
@@ -141,15 +146,16 @@ void MainWindow::checkVictory(){
         int coinType = rand() % 3;
         actual->giftCoins.agregar(coinType);
         ui->lCoinsDonables->setText(QString("Donables: %1").arg(actual->giftCoins.size));
-        actual->logros.agregar(new Mensaje(QString("Has obtenido una victoria!")), VICT);//agregar victoria
+        actual->logros.agregar(VICT);//agregar victoria
+        cantidadLogs++;
         actualizarVictorias();
     }
 }
 
 void MainWindow::checkLoss(){
     if(anyAtTop()){
-        cout<<"YES!"<<endl;
-        actual->logros.agregar(new Mensaje(QString("Has obtenido una derrota.")), LOSE);
+        ui->lNewVictoria->setText("Has adquirido una derrota!");
+        actual->logros.agregar(LOST);
     }
 }
 
@@ -171,7 +177,6 @@ void MainWindow::incrementCounter(){
 
 int MainWindow::tipoToInt(){
     char tipo = ui->cTipo->currentText().toStdString().at(0);
-    cout<<tipo<<endl;
     //W, G, S
     switch(tipo){
         case 'W':

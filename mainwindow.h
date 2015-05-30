@@ -8,7 +8,6 @@
 #include <vector>
 #include <QTimer>
 #include <QMessageBox>
-#include "Mensaje.h"
 
 namespace Ui {
 class MainWindow;
@@ -57,6 +56,7 @@ private:
     QString pHambre, pSleep, pEnfermedad, pDesechos;
     QString log;
     unsigned int TIEMPO;
+    unsigned int cantidadLogs;
     //Funciones
     void init();
     void checkStatus();
